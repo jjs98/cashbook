@@ -19,7 +19,7 @@ public class RefreshTests : TestBase
             RefreshEndpoint,
             EmptyRequest,
             RefreshEndpointResponse
-        >(new EmptyRequest());
+        >(EmptyRequest.Instance);
 
         // Assert
         await Assert.That(response.Response.StatusCode).IsEqualTo(HttpStatusCode.OK);
@@ -37,7 +37,7 @@ public class RefreshTests : TestBase
             RefreshEndpoint,
             EmptyRequest,
             RefreshEndpointResponse
-        >(new EmptyRequest());
+        >(EmptyRequest.Instance);
 
         // Assert
         await Assert.That(response.Response.StatusCode).IsEqualTo(HttpStatusCode.Unauthorized);

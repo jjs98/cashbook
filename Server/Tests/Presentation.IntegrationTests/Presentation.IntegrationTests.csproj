@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FastEndpoints.Testing" Version="7.2.0" />
-    <PackageReference Include="Npgsql" Version="10.0.1" />
-    <PackageReference Include="Testcontainers.PostgreSql" Version="4.10.0" />
-    <PackageReference Include="TUnit" Version="1.13.40" />
-    <PackageReference Include="TUnit.AspNetCore" Version="1.13.40" />
+    <PackageReference Include="FastEndpoints.Testing" Version="8.2.0" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+    <PackageReference Include="Testcontainers.PostgreSql" Version="4.13.0" />
+    <PackageReference Include="TUnit" Version="1.58.0" />
+    <PackageReference Include="TUnit.AspNetCore" Version="1.58.0" />
   </ItemGroup>
 
   <ItemGroup>

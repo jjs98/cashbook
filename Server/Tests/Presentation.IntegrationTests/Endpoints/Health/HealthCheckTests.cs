@@ -19,7 +19,7 @@ public class HealthCheckTests : TestBase
             HealthCheckEndpoint,
             EmptyRequest,
             HealthCheckResponse
-        >(new EmptyRequest());
+        >(EmptyRequest.Instance);
 
         // Assert
         await Assert.That(response.Response.StatusCode).IsEqualTo(HttpStatusCode.OK);
@@ -49,7 +49,7 @@ public class HealthCheckTests : TestBase
             HealthCheckEndpoint,
             EmptyRequest,
             HealthCheckResponse
-        >(new EmptyRequest());
+        >(EmptyRequest.Instance);
 
         // Assert
         await Assert.That(response.Response.StatusCode).IsEqualTo(HttpStatusCode.OK);

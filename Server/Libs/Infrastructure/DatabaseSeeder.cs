@@ -1,6 +1,7 @@
 ﻿using Domain;
 using Domain.Utilities;
 using Infrastructure.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
@@ -15,49 +16,69 @@ public class DatabaseSeeder(AppDbContext context)
 
     public void VerifyRole(string roleName)
     {
-        if (!context.Roles.Any(x => x.Name == roleName))
+        try
         {
-            context.Roles.Add(new RoleEntity { Name = roleName });
+            if (!context.Roles.Any(x => x.Name == roleName))
+            {
+                context.Roles.Add(new RoleEntity { Name = roleName });
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+        }
+        catch (DbUpdateException ex)
+        {
+            if (ex.InnerException?.Data["Routine"]?.ToString() != "_bt_check_unique")
+            {
+                throw;
+            }
         }
     }
 
     public void VerifyAdmin()
     {
-        var roles = context
-            .Roles.Where(x => x.Name == Constants.Roles.Admin || x.Name == Constants.Roles.User)
-            .ToDictionary(x => x.Name);
-
-        if (
-            !roles.TryGetValue(Constants.Roles.Admin, out var adminRole)
-            || !roles.TryGetValue(Constants.Roles.User, out var userRole)
-        )
+        try
         {
-            throw new Exception(
-                $"{Constants.Roles.Admin} or {Constants.Roles.User} role not found in the database."
-            );
-        }
+            var roles = context
+                .Roles.Where(x => x.Name == Constants.Roles.Admin || x.Name == Constants.Roles.User)
+                .ToDictionary(x => x.Name);
 
-        var adminUser = context.Users.FirstOrDefault(x =>
-            x.UserRoles != null
-            && x.UserRoles.Any(ur => ur.RoleId == adminRole.Id)
-            && x.UserRoles.Any(ur => ur.RoleId == userRole.Id)
-        );
-        if (adminUser is null)
-        {
-            var user = new UserEntity
+            if (
+                !roles.TryGetValue(Constants.Roles.Admin, out var adminRole)
+                || !roles.TryGetValue(Constants.Roles.User, out var userRole)
+            )
             {
-                Username = "admin",
-                Password = HashingUtility.HashPassword("admin"),
-                UserRoles =
-                [
-                    new UserRoleEntity { RoleId = adminRole.Id },
-                    new UserRoleEntity { RoleId = userRole.Id },
-                ],
-            };
-            context.Users.Add(user);
-            context.SaveChanges();
+                throw new Exception(
+                    $"{Constants.Roles.Admin} or {Constants.Roles.User} role not found in the database."
+                );
+            }
+
+            var adminUser = context.Users.FirstOrDefault(x =>
+                x.UserRoles != null
+                && x.UserRoles.Any(ur => ur.RoleId == adminRole.Id)
+                && x.UserRoles.Any(ur => ur.RoleId == userRole.Id)
+            );
+            if (adminUser is null)
+            {
+                var user = new UserEntity
+                {
+                    Username = "admin",
+                    Password = HashingUtility.HashPassword("admin"),
+                    UserRoles =
+                    [
+                        new UserRoleEntity { RoleId = adminRole.Id },
+                        new UserRoleEntity { RoleId = userRole.Id },
+                    ],
+                };
+                context.Users.Add(user);
+                context.SaveChanges();
+            }
+        }
+        catch (DbUpdateException ex)
+        {
+            if (ex.InnerException?.Data["Routine"]?.ToString() != "_bt_check_unique")
+            {
+                throw;
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Presentation.IntegrationTests;
 public abstract class TestBase : WebApplicationTest<WebApiFactory, Program>
 {
     [ClassDataSource<TestDatabase>(Shared = SharedType.PerTestSession)]
-    public TestDatabase Database { get; init; } = null!;
+    public required TestDatabase Database { get; init; } = null!;
 
     public static UserEntity GetTestUser()
     {

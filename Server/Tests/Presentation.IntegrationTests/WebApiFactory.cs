@@ -12,6 +12,11 @@ namespace Presentation.IntegrationTests;
 public class WebApiFactory : TestWebApplicationFactory<Program>
 {
     [ClassDataSource<TestDatabase>(Shared = SharedType.PerTestSession)]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Usage",
+        "TUnit0043:Property must use `required` keyword",
+        Justification = "Is initialized by the test framework"
+    )]
     public TestDatabase Database { get; init; } = null!;
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
