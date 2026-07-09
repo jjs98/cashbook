@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 using FastEndpoints;
 using Presentation.Endpoints.Users;
 
-namespace Presentation.IntegrationTests.Users;
+namespace Presentation.IntegrationTests.Endpoints.Users;
 
 public class GetFullNameTests : TestBase
 {

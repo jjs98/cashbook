@@ -2,7 +2,7 @@
 using FastEndpoints;
 using Presentation.Endpoints.Auth;
 
-namespace Presentation.IntegrationTests.Auth;
+namespace Presentation.IntegrationTests.Endpoints.Auth;
 
 public class RefreshTests : TestBase
 {

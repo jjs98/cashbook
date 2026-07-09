@@ -4,7 +4,7 @@ using FastEndpoints;
 using Presentation.Endpoints.Auth;
 using Presentation.IntegrationTests.Builder;
 
-namespace Presentation.IntegrationTests.Auth;
+namespace Presentation.IntegrationTests.Endpoints.Auth;
 
 public class LoginTests : TestBase
 {
