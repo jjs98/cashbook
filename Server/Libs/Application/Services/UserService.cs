@@ -6,7 +6,7 @@ using InterfaceGenerator;
 namespace Application.Services;
 
 [GenerateAutoInterface]
-public class UserService(IUserRepository userRepository, IAuthService authService) : IUserService
+public class UserService(IUserRepository userRepository) : IUserService
 {
     public async Task<IEnumerable<User>> GetAll()
     {
@@ -36,7 +36,10 @@ public class UserService(IUserRepository userRepository, IAuthService authServic
     public async Task ChangePassword(int id, PasswordChange passwordChange)
     {
         var user = await userRepository.GetById(id);
-        if (user == null || !BCrypt.Net.BCrypt.Verify(passwordChange.OldPassword, user.Password))
+        if (
+            user == null
+            || !HashingUtility.VerifyPassword(passwordChange.OldPassword, user.Password)
+        )
         {
             throw new UnauthorizedAccessException("Invalid credentials");
         }
