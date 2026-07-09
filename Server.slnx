@@ -2,7 +2,7 @@
   <Folder Name="/.Solution Items/">
     <File Path=".github/workflows/build.yaml" />
     <File Path=".gitignore" />
-    <File Path="server/Dockerfile" />
+    <File Path="Server/Dockerfile" />
   </Folder>
   <Folder Name="/Libs/">
     <Project Path="Server/Libs/Application/Application.csproj" Id="6b69c72c-bd19-44fc-b50e-dfbbac67436e" />
@@ -13,5 +13,5 @@
   <Folder Name="/Tests/">
     <Project Path="Server/Tests/Presentation.IntegrationTests/Presentation.IntegrationTests.csproj" Id="447a3a2d-c084-46a2-892f-18b80db907d2" />
   </Folder>
-  <Project Path="server/Bootstrap/Bootstrap.csproj" />
+  <Project Path="Server/Bootstrap/Bootstrap.csproj" />
 </Solution>
