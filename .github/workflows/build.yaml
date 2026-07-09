@@ -30,7 +30,7 @@ jobs:
         run: npm install -g pnpm
 
       - name: replace server url
-        run: sed -i "s|SERVER_URL|$SERVER_URL|g" ./client/src/environments/environment.ts
+        run: sed -i "s|SERVER_URL|${{ env.SERVER_URL }}|g" ./client/src/environments/environment.ts
 
       - run: pnpm install
         working-directory: ./client
@@ -62,21 +62,21 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: $DOCKER_REGISTRY/$NAME-client
+          images: ${{ env.DOCKER_REGISTRY }}/${{ env.NAME }}-client
 
       - name: log in to Docker Registry
         uses: docker/login-action@v2
         with:
-          registry: $DOCKER_REGISTRY
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
 
       - name: build and push
         uses: docker/build-push-action@v6
         with:
           context: client
           push: true
-          tags: $DOCKER_REGISTRY/$NAME-client:latest
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.NAME }}-client:latest
           platforms: linux/arm64
 
   build-backend:
@@ -113,7 +113,7 @@ jobs:
         uses: codecov/codecov-action@v5
         if: ${{ !cancelled() }}
         with:
-          token: $CODECOV_TOKEN
+          token: ${{ env.CODECOV_TOKEN }}
           report_type: test_results
           files: ./TestResults/junit/*.xml
 
@@ -121,20 +121,20 @@ jobs:
         uses: codecov/codecov-action@v5
         if: ${{ !cancelled() }}
         with:
-          token: $CODECOV_TOKEN
+          token: ${{ env.CODECOV_TOKEN }}
           files: ./TestResults/*.xml
 
       - name: log in to Docker Registry
         uses: docker/login-action@v2
         with:
-          registry: $DOCKER_REGISTRY
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
 
       - name: build and push
         uses: docker/build-push-action@v6
         with:
           context: server
           push: true
-          tags: $DOCKER_REGISTRY/$NAME-api:latest
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.NAME }}-api:latest
           platforms: linux/arm64
