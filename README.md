@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/github/actions/workflow/status/jjs98/cashbook/build.yml?branch=main&style=for-the-badge)](https://github.com/jjs98/cashbook/actions/workflows/build.yml?branch=main&style=for-the-badge)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/jjs98/cashbook/build.yaml?branch=main&style=for-the-badge)](https://github.com/jjs98/cashbook/actions/workflows/build.yaml?branch=main&style=for-the-badge)
 [![Codecov](https://img.shields.io/codecov/c/github/jjs98/cashbook?style=for-the-badge)](https://codecov.io/gh/jjs98/cashbook)
 
 # Cashbook
