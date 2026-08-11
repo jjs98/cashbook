@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: p@ssw0rd
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+ 
+  adminer:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@test.de
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - "8080:80"
+
+volumes:
+  db_data:
+    

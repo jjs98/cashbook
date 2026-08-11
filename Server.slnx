@@ -2,6 +2,7 @@
   <Folder Name="/.Solution Items/">
     <File Path=".github/workflows/build.yaml" />
     <File Path=".gitignore" />
+    <File Path="docker-compose.local.yml" />
     <File Path="Server/Dockerfile" />
   </Folder>
   <Folder Name="/Libs/">
