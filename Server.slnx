@@ -2,17 +2,30 @@
   <Folder Name="/.Solution Items/">
     <File Path=".github/workflows/build.yaml" />
     <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
     <File Path="docker-compose.local.yml" />
     <File Path="Server/Dockerfile" />
   </Folder>
   <Folder Name="/Libs/">
-    <Project Path="Server/Libs/Application/Application.csproj" Id="6b69c72c-bd19-44fc-b50e-dfbbac67436e" />
+    <Project
+      Path="Server/Libs/Application/Application.csproj"
+      Id="6b69c72c-bd19-44fc-b50e-dfbbac67436e"
+    />
     <Project Path="Server/Libs/Domain/Domain.csproj" Id="013d11fd-2b44-4784-bc0c-1e4aa8503395" />
-    <Project Path="Server/Libs/Infrastructure/Infrastructure.csproj" Id="321f8e33-18c2-4116-8d7a-672d95edc7ad" />
-    <Project Path="Server/Libs/Presentation/Presentation.csproj" Id="6ed402c9-edce-4552-bfa9-01c9a0ba895a" />
+    <Project
+      Path="Server/Libs/Infrastructure/Infrastructure.csproj"
+      Id="321f8e33-18c2-4116-8d7a-672d95edc7ad"
+    />
+    <Project
+      Path="Server/Libs/Presentation/Presentation.csproj"
+      Id="6ed402c9-edce-4552-bfa9-01c9a0ba895a"
+    />
   </Folder>
   <Folder Name="/Tests/">
-    <Project Path="Server/Tests/Presentation.IntegrationTests/Presentation.IntegrationTests.csproj" Id="447a3a2d-c084-46a2-892f-18b80db907d2" />
+    <Project
+      Path="Server/Tests/Presentation.IntegrationTests/Presentation.IntegrationTests.csproj"
+      Id="447a3a2d-c084-46a2-892f-18b80db907d2"
+    />
   </Folder>
   <Project Path="Server/Bootstrap/Bootstrap.csproj" />
 </Solution>
