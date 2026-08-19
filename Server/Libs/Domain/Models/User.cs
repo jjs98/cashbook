@@ -15,6 +15,12 @@ public class User
         if (string.IsNullOrWhiteSpace(FirstName) && string.IsNullOrWhiteSpace(LastName))
             return Username;
 
+        if (string.IsNullOrWhiteSpace(FirstName))
+            return LastName!;
+
+        if (string.IsNullOrWhiteSpace(LastName))
+            return FirstName;
+
         return $"{FirstName} {LastName}";
     }
 }
