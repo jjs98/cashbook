@@ -4,12 +4,12 @@ WORKDIR /app
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-COPY ../Directory.Build.props Directory.Build.props
-COPY Bootstrap/Bootstrap.csproj Bootstrap/
-COPY Libs/Presentation/Presentation.csproj Libs/Presentation/
-COPY Libs/Application/Application.csproj Libs/Application/
-COPY Libs/Domain/Domain.csproj Libs/Domain/
-COPY Libs/Infrastructure/Infrastructure.csproj Libs/Infrastructure/
+COPY Directory.Build.props .
+COPY Server/Bootstrap/Bootstrap.csproj Bootstrap/
+COPY Server/Libs/Presentation/Presentation.csproj Libs/Presentation/
+COPY Server/Libs/Application/Application.csproj Libs/Application/
+COPY Server/Libs/Domain/Domain.csproj Libs/Domain/
+COPY Server/Libs/Infrastructure/Infrastructure.csproj Libs/Infrastructure/
 
 RUN dotnet restore Bootstrap/Bootstrap.csproj
 RUN dotnet restore Libs/Presentation/Presentation.csproj
@@ -17,7 +17,7 @@ RUN dotnet restore Libs/Application/Application.csproj
 RUN dotnet restore Libs/Domain/Domain.csproj
 RUN dotnet restore Libs/Infrastructure/Infrastructure.csproj
 
-COPY . .
+COPY Server/ .
 
 WORKDIR /src/Bootstrap
 RUN dotnet publish -c release -o /app/publish
