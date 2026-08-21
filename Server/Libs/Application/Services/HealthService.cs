@@ -1,23 +1,18 @@
 ﻿using Domain.Enums;
 using Domain.Models;
-using Infrastructure;
+using Infrastructure.Repositories.Interfaces;
 using InterfaceGenerator;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services;
 
 [GenerateAutoInterface]
-public class HealthService(IDbContextFactory<AppDbContext> dbContextFactory) : IHealthService
+public class HealthService(IHealthRepository healthRepository) : IHealthService
 {
     public async Task<HealthStatus> GetDatabaseHealth()
     {
         try
         {
-            await using var dbContext = await dbContextFactory.CreateDbContextAsync();
-
-            using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(100));
-
-            bool canConnect = await dbContext.Database.CanConnectAsync(cts.Token);
+            bool canConnect = await healthRepository.GetHealth();
 
             return new HealthStatus(
                 "Database",

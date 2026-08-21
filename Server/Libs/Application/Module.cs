@@ -12,6 +12,7 @@ public static class Module
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IUserRoleService, UserRoleService>();
         services.AddScoped<IHealthService, HealthService>();
+        services.AddScoped<ITokenService, TokenService>();
 
         return services;
     }
