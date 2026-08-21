@@ -3,12 +3,12 @@ using Domain;
 using FastEndpoints;
 using Infrastructure;
 using Infrastructure.Entities;
+using IntegrationTests.Helper.Builder;
 using Microsoft.EntityFrameworkCore;
 using Presentation.Endpoints.Auth;
-using Presentation.IntegrationTests.Builder;
 using TUnit.AspNetCore;
 
-namespace Presentation.IntegrationTests;
+namespace IntegrationTests.Helper;
 
 public abstract class TestBase : WebApplicationTest<WebApiFactory, Program>
 {

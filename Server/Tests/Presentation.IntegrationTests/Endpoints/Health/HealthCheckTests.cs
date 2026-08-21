@@ -1,6 +1,7 @@
 using System.Net;
 using Domain.Enums;
 using FastEndpoints;
+using IntegrationTests.Helper;
 using Presentation.Endpoints.Health;
 
 namespace Presentation.IntegrationTests.Endpoints.Health;

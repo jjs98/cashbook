@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TUnit.AspNetCore;
 
-namespace Presentation.IntegrationTests;
+namespace IntegrationTests.Helper;
 
 public class WebApiFactory : TestWebApplicationFactory<Program>
 {

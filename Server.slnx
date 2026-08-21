@@ -14,8 +14,10 @@
     <Project Path="Server/Libs/Presentation/Presentation.csproj" Id="6ed402c9-edce-4552-bfa9-01c9a0ba895a" />
   </Folder>
   <Folder Name="/Tests/">
+    <Project Path="Server/Tests/Application.IntegrationTests/Application.IntegrationTests.csproj" />
     <Project Path="Server/Tests/Application.UnitTests/Application.UnitTests.csproj" Id="8a5618db-a7a1-45af-a277-f56e53964fed" />
     <Project Path="Server/Tests/Domain.UnitTests/Domain.UnitTests.csproj" Id="e12b426d-669a-4d94-a177-afd36b79cf86" />
+    <Project Path="Server/Tests/IntegrationTests.Helper/IntegrationTests.Helper.csproj" Id="b710ef93-a05a-4af3-abd0-be0f05ecfcbb" />
     <Project Path="Server/Tests/Presentation.IntegrationTests/Presentation.IntegrationTests.csproj" Id="447a3a2d-c084-46a2-892f-18b80db907d2" />
   </Folder>
   <Project Path="Server/Bootstrap/Bootstrap.csproj" />

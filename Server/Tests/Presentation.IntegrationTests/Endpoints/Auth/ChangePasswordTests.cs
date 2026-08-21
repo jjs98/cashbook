@@ -2,6 +2,7 @@
 using System.Net.Http.Json;
 using Domain.Models;
 using FastEndpoints;
+using IntegrationTests.Helper;
 using Presentation.Endpoints.Auth;
 
 namespace Presentation.IntegrationTests.Endpoints.Auth;

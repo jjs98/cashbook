@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using FastEndpoints;
+using IntegrationTests.Helper;
 using Presentation.Endpoints.Auth;
 
 namespace Presentation.IntegrationTests.Endpoints.Auth;

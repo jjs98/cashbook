@@ -2,7 +2,7 @@
 using Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Presentation.IntegrationTests.Builder;
+namespace IntegrationTests.Helper.Builder;
 
 public class UserBuilder(AppDbContext dbContext)
 {

@@ -1,8 +1,9 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using FastEndpoints;
+using IntegrationTests.Helper;
+using IntegrationTests.Helper.Builder;
 using Presentation.Endpoints.Auth;
-using Presentation.IntegrationTests.Builder;
 
 namespace Presentation.IntegrationTests.Endpoints.Auth;
 

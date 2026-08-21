@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using FastEndpoints;
+using IntegrationTests.Helper;
 using Presentation.Endpoints.Users;
 
 namespace Presentation.IntegrationTests.Endpoints.Users;

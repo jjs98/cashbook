@@ -8,7 +8,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Libs\Presentation\Presentation.csproj" />
+    <ProjectReference Include="..\..\Libs\Application\Application.csproj" />
     <ProjectReference Include="..\IntegrationTests.Helper\IntegrationTests.Helper.csproj" />
   </ItemGroup>
 </Project>
