@@ -4,6 +4,7 @@ WORKDIR /app
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
+COPY Directory.Build.props Directory.Build.props
 COPY Bootstrap/Bootstrap.csproj Bootstrap/
 COPY Libs/Presentation/Presentation.csproj Libs/Presentation/
 COPY Libs/Application/Application.csproj Libs/Application/
