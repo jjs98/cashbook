@@ -33,6 +33,7 @@ public class AuthServiceTests
 
         //Act
         var authToken = await _sut.Login(loginRequest);
+
         // Assert
         await Assert.That(authToken).IsNotNull();
         await Assert.That(authToken.Token).IsNotNullOrEmpty();

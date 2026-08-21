@@ -36,10 +36,7 @@ public class UserService(IUserRepository userRepository) : IUserService
     public async Task ChangePassword(int id, PasswordChange passwordChange)
     {
         var user = await userRepository.GetById(id);
-        if (
-            user == null
-            || !HashingUtility.VerifyPassword(passwordChange.OldPassword, user.Password)
-        )
+        if (!HashingUtility.VerifyPassword(passwordChange.OldPassword, user.Password))
         {
             throw new UnauthorizedAccessException("Invalid credentials");
         }

@@ -19,8 +19,10 @@ public class HealthServiceTests
     {
         // Arrange
         _healthRepository.GetHealth().Returns(true);
+
         // Act
         var healthStatus = await _sut.GetDatabaseHealth();
+
         // Assert
         _healthRepository.GetHealth().WasCalled(Times.Once);
         await Assert.That(healthStatus.ModuleName).IsEqualTo("Database");
@@ -32,8 +34,10 @@ public class HealthServiceTests
     {
         // Arrange
         _healthRepository.GetHealth().Returns(false);
+
         // Act
         var healthStatus = await _sut.GetDatabaseHealth();
+
         // Assert
         _healthRepository.GetHealth().WasCalled(Times.Once);
         await Assert.That(healthStatus.ModuleName).IsEqualTo("Database");
@@ -45,8 +49,10 @@ public class HealthServiceTests
     {
         // Arrange
         _healthRepository.GetHealth().Throws(new Exception("Database connection error"));
+
         // Act
         var healthStatus = await _sut.GetDatabaseHealth();
+
         // Assert
         _healthRepository.GetHealth().WasCalled(Times.Once);
         await Assert.That(healthStatus.ModuleName).IsEqualTo("Database");
@@ -58,6 +64,7 @@ public class HealthServiceTests
     {
         // Act
         var healthStatus = HealthService.GetApiHealth();
+
         // Assert
         await Assert.That(healthStatus.ModuleName).IsEqualTo("Api");
         await Assert.That(healthStatus.Status).IsEqualTo(HealthStatusEnum.Healthy.ToString());
