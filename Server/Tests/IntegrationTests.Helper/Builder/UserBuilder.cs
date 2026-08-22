@@ -1,9 +1,11 @@
-﻿using Infrastructure;
+﻿using System.Diagnostics.CodeAnalysis;
+using Infrastructure;
 using Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace IntegrationTests.Helper.Builder;
 
+[ExcludeFromCodeCoverage]
 public class UserBuilder(AppDbContext dbContext)
 {
     private readonly List<UserEntity> _users = [];
