@@ -33,17 +33,6 @@ public class UserService(IUserRepository userRepository) : IUserService
         await userRepository.Update(user);
     }
 
-    public async Task ChangePassword(int id, PasswordChange passwordChange)
-    {
-        var user = await userRepository.GetById(id);
-        if (!HashingUtility.VerifyPassword(passwordChange.OldPassword, user.Password))
-        {
-            throw new UnauthorizedAccessException("Invalid credentials");
-        }
-        var hashedPassword = HashingUtility.HashPassword(passwordChange.NewPassword);
-        await userRepository.UpdatePassword(id, hashedPassword);
-    }
-
     public async Task Delete(int id)
     {
         await userRepository.Delete(id);

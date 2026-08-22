@@ -64,4 +64,56 @@ public class AuthServiceTests
         _userRepository.GetByUsername(loginRequest.Username).WasCalled(Times.Once);
         _tokenService.GenerateJwtToken(user).WasCalled(Times.Never);
     }
+
+    [Test]
+    public async Task ChangePassword_ShouldUpdatePassword_WhenOldPasswordIsCorrect()
+    {
+        // Arrange
+        var userId = 1;
+        var oldPassword = "oldpassword";
+        var newPassword = "newpassword";
+        var passwordChange = new PasswordChange(oldPassword, newPassword);
+        var user = new User
+        {
+            Id = userId,
+            Username = "testuser",
+            Password = HashingUtility.HashPassword(oldPassword),
+            Email = "test@test.com",
+        };
+        _userRepository.GetById(userId).Returns(user);
+        _userRepository.UpdatePassword(userId, Arg.Any<string>()).Returns(() => Task.CompletedTask);
+
+        // Act
+        await _sut.ChangePassword(userId, passwordChange);
+
+        // Assert
+        _userRepository.GetById(userId).WasCalled(Times.Once);
+        _userRepository.UpdatePassword(userId, Arg.Any<string>()).WasCalled(Times.Once);
+    }
+
+    [Test]
+    public async Task ChangePassword_ShouldThrowUnauthorizedAccessException_WhenOldPasswordIsIncorrect()
+    {
+        // Arrange
+        var userId = 1;
+        var oldPassword = "oldpassword";
+        var wrongOldPassword = "wrongpassword";
+        var newPassword = "newpassword";
+        var passwordChange = new PasswordChange(wrongOldPassword, newPassword);
+        var user = new User
+        {
+            Id = userId,
+            Username = "testuser",
+            Password = HashingUtility.HashPassword(oldPassword),
+            Email = "test@test.com",
+        };
+        _userRepository.GetById(userId).Returns(user);
+
+        // Act & Assert
+        await Assert.ThrowsAsync<UnauthorizedAccessException>(async () =>
+            await _sut.ChangePassword(userId, passwordChange)
+        );
+        _userRepository.GetById(userId).WasCalled(Times.Once);
+        _userRepository.UpdatePassword(userId, Arg.Any<string>()).WasCalled(Times.Never);
+    }
 }

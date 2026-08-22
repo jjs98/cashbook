@@ -22,7 +22,7 @@ public class ChangePasswordEndpointValidator : Validator<ChangePasswordEndpointR
 }
 
 public class ChangePasswordEndpoint(
-    IUserService userService,
+    IAuthService authService,
     ILogger<ChangePasswordEndpoint> logger
 ) : Endpoint<ChangePasswordEndpointRequest, EmptyResponse>
 {
@@ -44,7 +44,7 @@ public class ChangePasswordEndpoint(
                 return;
             }
             var passwordChange = new PasswordChange(req.OldPassword, req.NewPassword);
-            await userService.ChangePassword(userId, passwordChange);
+            await authService.ChangePassword(userId, passwordChange);
             await Send.OkAsync(ct);
         }
         catch (Exception ex)
