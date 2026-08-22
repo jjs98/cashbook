@@ -98,34 +98,59 @@ jobs:
       - name: dotnet build
         run: dotnet build --no-restore
 
-      - name: dotnet test
-        run: |
-          export ConnectionStrings__AppDbContext="Server=localhost;Port=5432;Database=test;User Id=test;Password=test;"
-          export Jwt__Key="ThisIsMySuperSecretKeyWhichNeedsToBeASpecificLengthForSomeReason"
-          export Jwt__Issuer="test.de"
-          export Jwt__Audience="test.de"
-          dotnet test --test-modules "Server/Tests/**/bin/Debug/net10.0/*Tests.dll" --no-restore --coverage --coverage-output-format cobertura --report-trx --results-directory ./TestResults
-
       - name: install trx2junit
         run: dotnet tool install --global trx2junit
 
-      - name: run trx2junit
-        run: trx2junit --output TestResults/junit TestResults/*.trx
+      - name: dotnet test unittests
+        run: dotnet test --test-modules "Server/Tests/**/bin/Debug/net10.0/*UnitTests.dll" --no-restore --coverage --coverage-output-format cobertura --report-trx --results-directory ./UnitTestResults
 
-      - name: Upload test results to Codecov
+      - name: run trx2junit for unittests
+        run: trx2junit --output UnitTestResults/junit TestResults/*.trx
+
+      - name: Upload unittest results to Codecov
         uses: codecov/codecov-action@v5
         if: ${{ !cancelled() }}
         with:
           token: ${{ env.CODECOV_TOKEN }}
           report_type: test_results
-          files: ./TestResults/junit/*.xml
+          files: ./UnitTestResults/junit/*.xml
+          flags: backend,unit-tests
 
-      - name: Upload coverage to Codecov
+      - name: Upload unittest coverage to Codecov
         uses: codecov/codecov-action@v5
         if: ${{ !cancelled() }}
         with:
           token: ${{ env.CODECOV_TOKEN }}
-          files: ./TestResults/*.xml
+          files: ./UnitTestResults/*.xml
+          flags: backend,unit-tests
+
+      - name: dotnet test integrationtests
+        run: |
+          export ConnectionStrings__AppDbContext="Server=localhost;Port=5432;Database=test;User Id=test;Password=test;"
+          export Jwt__Key="ThisIsMySuperSecretKeyWhichNeedsToBeASpecificLengthForSomeReason"
+          export Jwt__Issuer="test.de"
+          export Jwt__Audience="test.de"
+          dotnet test --test-modules "Server/Tests/**/bin/Debug/net10.0/*IntegrationTests.dll" --no-restore --coverage --coverage-output-format cobertura --report-trx --results-directory ./IntegrationTestResults
+          
+      - name: run trx2junit for integrationtests
+        run: trx2junit --output IntegrationTestResults/junit TestResults/*.trx
+
+      - name: Upload integrationtest results to Codecov
+        uses: codecov/codecov-action@v5
+        if: ${{ !cancelled() }}
+        with:
+          token: ${{ env.CODECOV_TOKEN }}
+          report_type: test_results
+          files: ./IntegrationTestResults/junit/*.xml
+          flags: backend,integration-tests
+
+      - name: Upload integrationtest coverage to Codecov
+        uses: codecov/codecov-action@v5
+        if: ${{ !cancelled() }}
+        with:
+          token: ${{ env.CODECOV_TOKEN }}
+          files: ./IntegrationTestResults/*.xml
+          flags: backend,integration-tests
 
       - name: log in to Docker Registry
         uses: docker/login-action@v2
