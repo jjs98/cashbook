@@ -105,7 +105,7 @@ jobs:
         run: dotnet test --test-modules "Server/Tests/**/bin/Debug/net10.0/*UnitTests.dll" --no-restore --coverage --coverage-output-format cobertura --report-trx --results-directory ./UnitTestResults
 
       - name: run trx2junit for unittests
-        run: trx2junit --output UnitTestResults/junit TestResults/*.trx
+        run: trx2junit --output UnitTestResults/junit UnitTestResults/*.trx
 
       - name: Upload unittest results to Codecov
         uses: codecov/codecov-action@v5
@@ -133,7 +133,7 @@ jobs:
           dotnet test --test-modules "Server/Tests/**/bin/Debug/net10.0/*IntegrationTests.dll" --no-restore --coverage --coverage-output-format cobertura --report-trx --results-directory ./IntegrationTestResults
           
       - name: run trx2junit for integrationtests
-        run: trx2junit --output IntegrationTestResults/junit TestResults/*.trx
+        run: trx2junit --output IntegrationTestResults/junit IntegrationTestResults/*.trx
 
       - name: Upload integrationtest results to Codecov
         uses: codecov/codecov-action@v5
