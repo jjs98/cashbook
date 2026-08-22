@@ -101,7 +101,7 @@ jobs:
           export Jwt__Key="ThisIsMySuperSecretKeyWhichNeedsToBeASpecificLengthForSomeReason"
           export Jwt__Issuer="test.de"
           export Jwt__Audience="test.de"
-          dotnet test --coverage --coverage-output-format cobertura --report-trx --results-directory ./TestResults
+          dotnet test --test-modules "Server/Tests/**/bin/Debug/net10.0/*Tests.dll" --coverage --coverage-output-format cobertura --report-trx --results-directory ./TestResults
 
       - name: install trx2junit
         run: dotnet tool install --global trx2junit
