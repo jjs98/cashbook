@@ -1,4 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ExcludeFromCodeCoverage>true</ExcludeFromCodeCoverage>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="FastEndpoints.Testing" Version="8.2.0" />
     <PackageReference Include="Npgsql" Version="10.0.3" />
